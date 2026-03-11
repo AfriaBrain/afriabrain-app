@@ -107,6 +107,7 @@ function goToApp(mode) {
   if (!currentUser) currentUser = { name: 'Demo', email: 'demo@afriabrain.co' };
   initApp();
   showScreen('app');
+  document.getElementById('themeBtn').style.display = 'none';
 }
 
 // ══════════════════════════════════════
@@ -140,6 +141,7 @@ function register() {
 function logout() {
   currentUser = null; messages = []; currentMode = 'cfo';
   showScreen('landing');
+  document.getElementById('themeBtn').style.display = 'flex';
 }
 
 // ══════════════════════════════════════
