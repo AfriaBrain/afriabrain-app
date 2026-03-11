@@ -225,13 +225,23 @@ async function sendMessage() {
 
     const data = await response.json();
     removeTyping(typingId);
+
+    if (!response.ok) {
+      const errMsg = data.error?.message || JSON.stringify(data);
+      addMessage('assistant', '❌ Erreur API (' + response.status + ') : ' + errMsg);
+      isLoading = false;
+      document.getElementById('sendBtn').disabled = false;
+      input.focus();
+      return;
+    }
+
     const reply = data.content?.[0]?.text || "Désolé, je n'ai pas pu traiter ta demande.";
     addMessage('assistant', reply);
     messages.push({ role: 'assistant', content: reply });
 
   } catch (err) {
     removeTyping(typingId);
-    addMessage('assistant', 'Connexion impossible. Vérifie ta connexion internet et réessaie.');
+    addMessage('assistant', '❌ Erreur : ' + err.message);
   }
 
   isLoading = false;
