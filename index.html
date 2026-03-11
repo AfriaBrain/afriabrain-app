@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AfriaBrain — Co-Fondateur IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- THEME BUTTON (visible sur toutes les pages) -->
+<button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+
+<!-- ══════════════════════════════════
+     LANDING
+══════════════════════════════════ -->
+<div class="screen active" id="landing">
+  <div class="landing-badge">Beta — Accès Gratuit</div>
+  <div class="landing-logo">AfriaBrain</div>
+  <p class="landing-tagline">Ton co-fondateur IA — CFO, juriste et stratège pour chaque PME africaine</p>
+
+  <div class="modes-grid">
+    <div class="mode-pill" onclick="goToApp('cfo')">
+      <span class="emoji">🧮</span>
+      <div class="label">CFO IA</div>
+      <div class="desc">Finances & Trésorerie</div>
+    </div>
+    <div class="mode-pill" onclick="goToApp('ohada')">
+      <span class="emoji">⚖️</span>
+      <div class="label">Juriste OHADA</div>
+      <div class="desc">Droit & Contrats</div>
+    </div>
+    <div class="mode-pill" onclick="goToApp('financement')">
+      <span class="emoji">🏦</span>
+      <div class="label">Financement</div>
+      <div class="desc">BOAD, DER, BAD</div>
+    </div>
+    <div class="mode-pill" onclick="goToApp('strategie')">
+      <span class="emoji">📊</span>
+      <div class="label">Stratégie</div>
+      <div class="desc">Marché & Croissance</div>
+    </div>
+    <div class="mode-pill" onclick="goToApp('commercial')">
+      <span class="emoji">🤝</span>
+      <div class="label">Commercial</div>
+      <div class="desc">Ventes & Clients</div>
+    </div>
+  </div>
+
+  <div class="cta-group">
+    <button class="btn-primary" onclick="showScreen('auth')">Commencer gratuitement</button>
+    <button class="btn-secondary" onclick="goToApp('cfo')">Voir la démo</button>
+  </div>
+  <p class="price-note">30 jours gratuits — puis <strong>6 000 FCFA/mois</strong></p>
+</div>
+
+<!-- ══════════════════════════════════
+     AUTH
+══════════════════════════════════ -->
+<div class="screen" id="auth">
+  <div class="auth-card">
+    <div class="auth-logo">AfriaBrain</div>
+    <p class="auth-subtitle">Ton co-fondateur IA pour PME africaines</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login', this)">Connexion</button>
+      <button class="auth-tab" onclick="switchTab('register', this)">Inscription</button>
+    </div>
+    <div id="loginForm">
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="vous@entreprise.com" id="loginEmail">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" class="form-input" placeholder="••••••••" id="loginPassword">
+      </div>
+      <button class="form-submit" onclick="login()">Se connecter →</button>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="form-group">
+        <label class="form-label">Prénom</label>
+        <input type="text" class="form-input" placeholder="Votre prénom" id="regName">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="vous@entreprise.com" id="regEmail">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" class="form-input" placeholder="••••••••" id="regPassword">
+      </div>
+      <button class="form-submit" onclick="register()">Créer mon compte →</button>
+    </div>
+    <span class="auth-back" onclick="showScreen('landing')">← Retour à l'accueil</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     APP
+══════════════════════════════════ -->
+<div class="screen" id="app">
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">AfriaBrain</div>
+    <div class="sidebar-section">Modes</div>
+    <button class="mode-btn active" id="btn-cfo" onclick="switchMode('cfo')">
+      <div class="mode-icon">🧮</div>
+      <div><div class="mode-name">CFO IA</div><div class="mode-desc">Finances & Trésorerie</div></div>
+    </button>
+    <button class="mode-btn" id="btn-ohada" onclick="switchMode('ohada')">
+      <div class="mode-icon">⚖️</div>
+      <div><div class="mode-name">Juriste OHADA</div><div class="mode-desc">Droit & Contrats</div></div>
+    </button>
+    <button class="mode-btn" id="btn-financement" onclick="switchMode('financement')">
+      <div class="mode-icon">🏦</div>
+      <div><div class="mode-name">Financement</div><div class="mode-desc">BOAD, DER, BAD</div></div>
+    </button>
+    <button class="mode-btn" id="btn-strategie" onclick="switchMode('strategie')">
+      <div class="mode-icon">📊</div>
+      <div><div class="mode-name">Stratégie</div><div class="mode-desc">Marché & Croissance</div></div>
+    </button>
+    <button class="mode-btn" id="btn-commercial" onclick="switchMode('commercial')">
+      <div class="mode-icon">🤝</div>
+      <div><div class="mode-name">Commercial</div><div class="mode-desc">Ventes & Clients</div></div>
+    </button>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div>
+          <div class="user-name" id="userName">Utilisateur</div>
+          <div class="user-plan">Plan Beta Gratuit</div>
+        </div>
+        <button class="logout-btn" onclick="logout()" title="Déconnexion">⏻</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-main">
+    <div class="chat-header">
+      <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+      <div class="chat-mode-icon" id="headerIcon">🧮</div>
+      <div>
+        <div class="chat-mode-name" id="headerName">CFO IA</div>
+        <div class="chat-mode-desc" id="headerDesc">Expert en finances et trésorerie</div>
+      </div>
+      <div class="header-actions">
+        <button class="header-btn" onclick="logout()" title="Accueil">🏠</button>
+      </div>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon" id="welcomeIcon">🧮</div>
+        <h2 id="welcomeTitle">Bonjour, je suis ton CFO IA</h2>
+        <p id="welcomeText">Pose-moi n'importe quelle question sur tes finances, ta trésorerie, ta comptabilité ou tes impôts.</p>
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+    </div>
+
+    <div class="input-area">
+      <div class="input-wrapper">
+        <textarea id="messageInput" placeholder="Pose ta question à AfriaBrain..." rows="1"
+          onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="sendMessage()">→</button>
+      </div>
+      <p class="input-hint">Entrée pour envoyer · Shift+Entrée pour nouvelle ligne</p>
+    </div>
+  </div>
+</div>
+
+<!-- API KEY MODAL -->
+<div class="api-modal" id="apiModal">
+  <div class="api-modal-card">
+    <div class="api-modal-title">AfriaBrain</div>
+    <p class="api-modal-desc">
+      Entre ta clé API Anthropic pour utiliser AfriaBrain.<br><br>
+      Obtiens ta clé sur <a href="https://console.anthropic.com" target="_blank" class="api-modal-link">console.anthropic.com</a> → API Keys → Create Key
+    </p>
+    <div class="form-group">
+      <label class="form-label">Clé API</label>
+      <input type="password" class="form-input" id="apiKeyInput" placeholder="sk-ant-...">
+    </div>
+    <button class="form-submit" onclick="saveKey()">Sauvegarder et continuer →</button>
+  </div>
+</div>
+
+
+  <script src="app.js"></script>
+</body>
+</html>
