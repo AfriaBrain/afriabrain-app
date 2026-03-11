@@ -97,6 +97,9 @@ let isLoading = false;
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  // Hide theme btn in app (has its own header), show elsewhere
+  const themeBtn = document.getElementById('themeBtn');
+  if (themeBtn) themeBtn.style.display = id === 'app' ? 'none' : 'flex';
 }
 
 function goToApp(mode) {
